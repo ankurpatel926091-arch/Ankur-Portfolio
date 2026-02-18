@@ -1,0 +1,133 @@
+<style>
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+   
+    
+}
+body{
+    font-family: Arial, sans-serif;}
+    
+ul{
+    display: flex;
+    align-items: center;
+    height: 100px;
+    background-color: black;
+    
+    color: white;
+    list-style: none;
+    font-size: 28px;
+    padding: 0 100px;
+ 
+   
+}
+
+ul li{
+    margin: 0 20px;
+    position: relative;
+    cursor: pointer;
+    align-items: center;
+    
+}
+
+ul li::after{
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 0;
+    height: 4px;
+    background-color: red;
+    transition: 0.4s;
+}
+
+ul li:hover::after{
+    width: 40px;
+}
+
+/* Logo */
+.logo{
+    height: 80px;
+    margin-right: 380px;
+}
+
+/* Icons container */
+.icons{
+    margin-left: auto;
+    display: flex;
+    gap: 30px;
+}
+
+.icons i{
+    cursor: pointer;
+}
+#photo{
+    width: 390px;
+    height: 390px;
+    background-image: url("Images/AA\ photo.jpeg");
+    background-size: 100% 100%;
+    background-position: center;
+    border-radius: 50%;
+}
+.a{
+    height: 500px;
+    width: 50%;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+   float: left;
+}
+.b {
+    height: 500px;
+    width: 50%;
+    
+    justify-content: center;
+    text-align: center;
+    float: left;
+    background-color:black;
+    color: white;
+    font-size: 25px;
+   
+}
+
+h1{
+    text-align: center;
+    font-size: 50px;
+    background: black;
+    color: red;
+}
+hr{
+    width: 60%;
+    height: 8px;
+    background: red;
+    margin: auto;
+}
+#p1{
+   width: 80%;
+   margin: auto;
+   background: black;
+   color: white;
+   font-size: 25px;
+   margin-top: 30px;
+}
+
+#outer{
+    width: 100%;
+    background-color: black;
+}
+p{
+    text-align: justify;
+}
+li{
+    color: #df1761;
+}
+.skillouter{
+    width: 80%;
+    background-color: aqua;
+    height: 290px;
+    margin: auto;
+    padding: 20px;
+    margin-top: 20px;
+
+}
