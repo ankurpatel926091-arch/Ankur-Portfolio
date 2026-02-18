@@ -240,6 +240,8 @@ ul li:hover::after{
     display:flex;
     flex-wrap:wrap;
     gap:30px;
+    text-align: center;
+    
 }
 
 .contact div{
@@ -247,6 +249,7 @@ ul li:hover::after{
     background:#222;
     padding:30px;
     border-radius:10px;
+   
 }
 
 /* ================= FOOTER ================= */
@@ -298,7 +301,18 @@ footer{
 
 .contact {
     padding: 60px 80px;
-    border-top: 3px solid #ff0066;
+   
+}
+.contact-in{
+     text-align: center;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+.contact-in:hover{
+    transform:translateY(-8px);
+    background:#df1761;
+    
 }
 
 .contact-container {
@@ -473,14 +487,14 @@ Experienced in translating design concepts into clean, maintainable code to deli
 <h2>Contact Me</h2>
 <hr>
 <div class="contact">
-<div>
+<div class="contact-in">
 <h3>Email</h3>
-<p>ankur@email.com</p>
+<p  style="text-align: center; margin-top: 10px;">ankur@email.com</p>
 </div>
 
-<div>
-<h3>Phone</h3>
-<p>+91 9198370285</p>
+<div class="contact-in" >
+<h3 >Phone</h3>
+<p style="text-align: center; margin-top: 10px;">+91 9198370285</p>
 </div>
 </div>
 </section>
