@@ -1,133 +1,360 @@
-<style>
+/* ================= RESET ================= */
 *{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-   
-    
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    scroll-behavior:smooth;
 }
+
 body{
-    font-family: Arial, sans-serif;}
-    
-ul{
-    display: flex;
-    align-items: center;
-    height: 100px;
-    background-color: black;
-    
-    color: white;
-    list-style: none;
-    font-size: 28px;
-    padding: 0 100px;
- 
-   
+    font-family: Arial, sans-serif;
+    background:#000;
+    color:#fff;
 }
 
-ul li{
-    margin: 0 20px;
-    position: relative;
-    cursor: pointer;
-    align-items: center;
-    
+/* ================= NAVBAR ================= */
+header{
+    width:100%;
+    background:#111;
+    position:fixed;
+    top:0;
+    z-index:1000;
 }
 
-ul li::after{
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 0;
-    height: 4px;
-    background-color: red;
-    transition: 0.4s;
+nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 50px;
 }
 
-ul li:hover::after{
-    width: 40px;
+nav ul{
+    display:flex;
+    list-style:none;
+    gap:20px;
+    align-items:center;
 }
 
-/* Logo */
-.logo{
-    height: 80px;
-    margin-right: 380px;
+nav ul li a{
+    text-decoration:none;
+    color:#fff;
+    position:relative;
 }
 
-/* Icons container */
+nav ul li a::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:-5px;
+    width:0;
+    height:3px;
+    background:#df1761;
+    transition:0.3s;
+}
+
+nav ul li a:hover::after{
+    width:100%;
+}
+
+.menu-toggle{
+    display:none;
+    font-size:25px;
+    cursor:pointer;
+    color:#fff;
+}
+
 .icons{
-    margin-left: auto;
-    display: flex;
-    gap: 30px;
+    display:flex;
+    gap:20px;
+    color:#df1761;
 }
 
-.icons i{
-    cursor: pointer;
-}
-#photo{
-    width: 390px;
-    height: 390px;
-    background-image: url("Images/AA\ photo.jpeg");
-    background-size: 100% 100%;
-    background-position: center;
-    border-radius: 50%;
-}
-.a{
-    height: 500px;
-    width: 50%;
-    background-color: black;
-    display: flex;
-    justify-content: center;
-   float: left;
-}
-.b {
-    height: 500px;
-    width: 50%;
-    
-    justify-content: center;
-    text-align: center;
-    float: left;
-    background-color:black;
-    color: white;
-    font-size: 25px;
-   
+/* ================= HERO ================= */
+.hero{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+    padding-top:120px;
+    padding-bottom:60px;
+    gap:40px;
 }
 
-h1{
-    text-align: center;
-    font-size: 50px;
-    background: black;
-    color: red;
+.hero-img{
+    width:300px;
+    height:300px;
+    background:url("Images/AA photo.jpeg") center/cover no-repeat;
+    border-radius:50%;
+    border:5px solid #df1761;
 }
-hr{
-    width: 60%;
-    height: 8px;
-    background: red;
-    margin: auto;
+
+.hero-text{
+    max-width:500px;
 }
+
+.hero-text h1{
+    font-size:40px;
+    margin-bottom:15px;
+}
+
+.hero-text span{
+    color:#df1761;
+}
+
+.hero-text p{
+    line-height:1.6;
+}
+
+/* ================= SECTIONS ================= */
+.section{
+    width:80%;
+    margin:60px auto;
+    text-align:center;
+}
+
+.section h2{
+    font-size:35px;
+    color:#df1761;
+}
+
+.section hr{
+    width:50%;
+    height:4px;
+    background:#df1761;
+    margin:10px auto 30px;
+    border:none;
+}
+
 #p1{
-   width: 80%;
-   margin: auto;
-   background: black;
-   color: white;
-   font-size: 25px;
-   margin-top: 30px;
+    width:100%;
+    font-size:18px;
+    line-height:1.7;
 }
 
-#outer{
-    width: 100%;
-    background-color: black;
+/* ================= ABOUT LIST ================= */
+.section ul{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:20px;
+    list-style:square;
+    margin-top:30px;
+    color:#df1761;
 }
-p{
-    text-align: justify;
-}
-li{
-    color: #df1761;
-}
+
+/* ================= SKILLS (FULL RESPONSIVE) ================= */
 .skillouter{
-    width: 80%;
-    background-color: aqua;
-    height: 290px;
-    margin: auto;
-    padding: 20px;
-    margin-top: 20px;
+    width:100%;
+    margin:auto;
+    padding:30px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:30px;
+    place-items:center;
+}
 
+.skill-icons img{
+    width:100%;
+    max-width:160px;
+    height:auto;
+}
+
+/* ================= SERVICES ================= */
+.services{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
+}
+
+.service-box{
+    background:#222;
+    padding:25px;
+    border-radius:10px;
+    transition:0.3s;
+}
+
+.service-box:hover{
+    transform:translateY(-8px);
+    background:#df1761;
+}
+
+/* ================= CONTACT SMALL BOXES ================= */
+.contact{
+    display:flex;
+    gap:30px;
+    justify-content:center;
+    flex-wrap:wrap;
+    padding:40px 20px;
+}
+
+.contact-in{
+    background:#222;
+    padding:30px;
+    border-radius:10px;
+    width:300px;
+    transition:0.3s;
+}
+
+.contact-in:hover{
+    transform:translateY(-8px);
+    background:#df1761;
+}
+
+/* ================= CONTACT FORM (LET'S TALK) ================= */
+.contactme{
+    width:100%;
+    margin:auto;
+}
+
+.contact-container{
+    display:flex;
+    justify-content:space-between;
+    gap:60px;
+    padding:60px 80px;
+}
+
+.contact-left{
+    width:50%;
+}
+
+.contact-left h1{
+    color:#df1761;
+    font-size:42px;
+    margin-bottom:20px;
+}
+
+.contact-left p{
+    line-height:1.8;
+    margin-bottom:15px;
+}
+
+.contact-right{
+    width:40%;
+}
+
+.contact-right label{
+    display:block;
+    margin:15px 0 8px;
+}
+
+.contact-right input,
+.contact-right textarea{
+    width:100%;
+    padding:14px;
+    background:#444;
+    border:none;
+    outline:none;
+    color:white;
+}
+
+.contact-right textarea{
+    height:150px;
+    resize:none;
+}
+
+/* ================= FOOTER ================= */
+footer{
+    text-align:center;
+    padding:20px;
+    background:#111;
+    margin-top:40px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+/* Tablet */
+@media (max-width:992px){
+
+    .skillouter{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .contact-container{
+        flex-direction:column;
+        padding:40px 30px;
+    }
+
+    .contact-left,
+    .contact-right{
+        width:100%;
+        text-align:center;
+    }
+}
+
+/* Mobile */
+@media (max-width:768px){
+
+    nav{
+        padding:15px 20px;
+    }
+
+    nav ul{
+        position:absolute;
+        top:70px;
+        left:-100%;
+        flex-direction:column;
+        width:100%;
+        background:#111;
+        padding:20px 0;
+        transition:0.4s;
+    }
+
+    nav ul.active{
+        left:0;
+    }
+
+    .menu-toggle{
+        display:block;
+    }
+
+    .icons{
+        display:none;
+    }
+
+    .hero{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .hero-img{
+        width:220px;
+        height:220px;
+    }
+
+    .hero-text h1{
+        font-size:28px;
+    }
+
+    .section{
+        width:95%;
+    }
+
+    .skillouter{
+        grid-template-columns:1fr;
+    }
+
+    .contact-container{
+        padding:30px 20px;
+    }
+
+    .contact-left h1{
+        font-size:28px;
+    }
+}
+/* ===== SKILLS IMAGES MOBILE ONE BY ONE ===== */
+@media (max-width:768px){
+
+    .skillouter{
+        grid-template-columns: 1fr;   /* 1 image per row */
+    }
+
+    .skill-icons{
+        display:flex;
+        justify-content:center;
+    }
+
+    .skill-icons img{
+        max-width:140px;
+        width:100%;
+    }
 }

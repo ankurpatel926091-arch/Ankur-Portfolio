@@ -8,7 +8,6 @@
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 
 <style>
@@ -159,18 +158,7 @@ nav ul li a:hover::after{
 
 /* ================= SKILLS ================= */
 
-.skills{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
-    gap:20px;
-    
 
-.skills img{
-    width:100px;
-    margin:auto;
-    background-color: #df1761;
-}
-}
 
 /* ================= SERVICES ================= */
 
@@ -224,7 +212,7 @@ ul li::after{
     transition: 0.4s;
 }
 
-ul li:hover::after{
+uf9 li:hover::after{
     width: 40px;
 }
 .icons{
@@ -284,18 +272,7 @@ footer{
         display:block;
     }
 }
-.skillouter{
-    width: 80%;
-   
-    height: 1090px;
-    margin: auto;
-    padding: 20px;
-    margin-top: 20px;
-    display: grid;
-    grid-template-columns: repeat(3,1fr);
-    gap: 20px;
 
-}
 
 
 
@@ -378,6 +355,15 @@ footer{
     width: 80%;
     margin: auto;
 }
+.photo{
+    height: 200px;
+    width: 200px;
+    padding: 20px;
+   
+}
+.photo:hover{
+     transform: scale(1.1);
+}
 
 
 
@@ -431,7 +417,7 @@ footer{
     <br><p>I am currently working as a Full Stack Developer at Digicoders Technologies Pvt Ltd. Lucknow, where I have gained hands-on experience in MERN Stack development. During my job, I successfully completed over 30 frontend projects and more than 15 full-stack projects for clients, showcasing my ability to deliver high-quality, scalable solutions. I have also completed 6-month internships from Digicoders Technologies Pvt. Ldt. Lucknow. I have also 1+ year experience as a MERN/MEAN Stack PHP Developer at DigiCoders Technologies Pvt. Ltd. Prayagraj.</p>
 </div>
 <ul style="list-style-type:square; ">
-    <li style="margin-left: 80px;">Team Work</li>
+    <li style="margin: auto;">Team Work</li>
     <li>Fast Learner</li>
     <li>Time Management</li>
     <li>Smart Work</li>
@@ -443,18 +429,20 @@ footer{
 <section class="section" id="skills">
 <h2>My Skills</h2>
 <hr>
-<div class="skillouter">
-     <div class="skill-icons"> <img src="Images/c.png" alt="" height="225px" width="225px"></div>
-     <div class="skill-icons"><img src="Images/ex.png" alt=""></div>
-     <div class="skill-icons"><img src="Images/github.jpg" alt=""></div>
-     <div class="skill-icons"><img src="Images/jawascript.jpg" alt=""></div>
-     <div class="skill-icons"><img src="Images/mongoDB.png" alt="" height="225px" width="225px"></div>
-     <div class="skill-icons"><img src="Images/nodejs.svg" alt="" height="225px" width="225px"></div>
-     <div class="skill-icons"><img src="Images/php.png" alt=""height="225px" width="225px"></div>
-     <div class="skill-icons"><img src="Images/python.jpg" alt=""></div>
-     <div class="skill-icons"><img src="Images/react.png" alt="" height="225px" width="225px"></div>
+
+<div style="height: 80%; width: 80%; background-color: blue; margin: auto;">
+    <img src="Images/c.png"  class="photo" alt="">
+    <img src="Images/ex.png"  class="photo" alt="">
+    <img src="Images/github.jpg"  class="photo" alt="">
+    <img src="Images/jawascript.jpg"  class="photo" alt="">
+    <img src="Images/mongoDB.png"  class="photo" alt="">
+    <img src="Images/nodejs.svg"  class="photo" alt="">
+    <img src="Images/react.png"  class="photo" alt="">
+    <img src="Images/python.jpg"  class="photo" alt="">
 </div>
+
 </section>
+
 
 <!-- SERVICES -->
 <section class="section" id="services">
