@@ -1,3 +1,6 @@
+import projectPhoto from "../../assets/projectphoto.png";
+import LibraryManagement from "../../assets/LibraryManagement.png";
+import portfolio from "../../assets/portfolio.png";
 export const projects = [
   {
     id: 1,
@@ -5,7 +8,7 @@ export const projects = [
     description:
       "Full-stack e-commerce with auth, dashboard & payments.",
 
-    image: "/projects/ecommerce.jpg",
+    image: projectPhoto,
 
     github: "https://github.com/ankurpatel926091-arch/E-Commerce-Website",
 
@@ -20,26 +23,25 @@ export const projects = [
       "Tailwind",
     ],
   },
+{
+  id: 2,
+  title: "Library Management",
 
-  {
-    id: 2,
-    title: "Library Management",
+  description:
+    "Modern library management system with CRUD operations, authentication and responsive dashboard.",
 
-    description:
-      "Modern library management system with CRUD operations, authentication and responsive dashboard.",
+  image: LibraryManagement,
 
-    image: "/projects/library.jpg",
+  github: "https://github.com/ankurpatel926091-arch",
 
-    github: "https://github.com/ankurpatel926091-arch",
+  live: "https://library.vercel.app",
 
-    live: "https://library.vercel.app",
-
-    tech: [
-      "React",
-      "Express",
-      "MongoDB",
-    ],
-  },
+  tech: [
+    "React",
+    "Express",
+    "MongoDB",
+  ],
+},
 
   {
     id: 3,
@@ -49,7 +51,7 @@ export const projects = [
     description:
       "Premium portfolio built with React, Tailwind CSS and Framer Motion featuring smooth animations and modern UI.",
 
-    image: "/projects/portfolio.jpg",
+    image: portfolio,
 
     github: "https://github.com/ankurpatel926091-arch",
 

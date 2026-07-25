@@ -15,9 +15,11 @@ const ContactInfo = () => {
       </h3>
 
       <p className="text-gray-400 leading-8">
-        Feel free to contact me for freelance work,
-        internships or full-time opportunities.
-      </p>
+        Let's Work Together 🚀
+
+        Feel free to contact me for freelance work, internships, full-time opportunities, or exciting collaborations.
+
+        I'm always open to discussing innovative ideas, building impactful web applications, and creating modern digital experiences. Whether you have a project in mind or just want to connect, I'd love to hear from you.  </p>
 
       <div className="space-y-5">
 
@@ -31,7 +33,7 @@ const ContactInfo = () => {
         <div className="flex items-center gap-4">
           <FaPhoneAlt className="text-cyan-400 text-xl" />
           <span className="text-gray-300">
-            +91 91983 70285 
+            +91 91983 70285
           </span>
         </div>
 

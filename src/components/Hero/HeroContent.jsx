@@ -78,28 +78,28 @@ const HeroContent = () => {
       <div className="flex gap-5 mt-10">
 
         <a
-          href="#"
+          href="https://github.com/ankurpatel926091-arch/"
           className="w-12 h-12 rounded-full bg-white/5 backdrop-blur-lg border border-white/10 flex items-center justify-center hover:text-cyan-400 hover:border-cyan-400 transition"
         >
           <FaGithub />
         </a>
 
         <a
-          href="#"
+          href="https://www.linkedin.com/in/ankur285/"
           className="w-12 h-12 rounded-full bg-white/5 backdrop-blur-lg border border-white/10 flex items-center justify-center hover:text-blue-400 hover:border-blue-400 transition"
         >
           <FaLinkedin />
         </a>
 
         <a
-          href="#"
+          href="https://www.instagram.com/ankurpatel9146/"
           className="w-12 h-12 rounded-full bg-white/5 backdrop-blur-lg border border-white/10 flex items-center justify-center hover:text-pink-500 hover:border-pink-500 transition"
         >
           <FaInstagram />
         </a>
 
         <a
-          href="#"
+          href="https://mail.google.com/mail/u/1/#inbox"
           className="w-12 h-12 rounded-full bg-white/5 backdrop-blur-lg border border-white/10 flex items-center justify-center hover:text-red-500 hover:border-red-500 transition"
         >
           <FaEnvelope />

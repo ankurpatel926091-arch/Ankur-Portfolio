@@ -1,10 +1,13 @@
+import softpro from "../../assets/softpro.jpeg";
+import infosys from "../../assets/infosys.png";
+import digicoder from "../../assets/digicoder.jpeg";
 export const certificates = [
   {
     id: 1,
     title: "MERN Stack Development",
     issuer: "Digi Coder",
     year: "2025",
-    image: "/certificates/mern.jpg",
+    image: softpro,
     link: "#",
   },
 
@@ -13,7 +16,7 @@ export const certificates = [
     title: "React.js Certification",
     issuer: "Infosys Springboard",
     year: "2025",
-    image: "/certificates/react.jpg",
+    image: infosys,
     link: "#",
   },
 
@@ -22,7 +25,7 @@ export const certificates = [
     title: "JavaScript Essentials",
     issuer: "Udemy",
     year: "2024",
-    image: "/certificates/javascript.jpg",
+     image: digicoder,
     link: "#",
   },
 ];
