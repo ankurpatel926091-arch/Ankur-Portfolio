@@ -1,0 +1,169 @@
+import { useEffect, useState } from "react";
+import { HiMenuAlt3, HiX } from "react-icons/hi";
+import { Link } from "react-scroll";
+
+const navLinks = [
+  { name: "Home", to: "home" },
+  { name: "About", to: "about" },
+  { name: "Skills", to: "skills" },
+  { name: "Experience", to: "experience" },
+  { name: "Projects", to: "projects" },
+  { name: "Certificates", to: "certificates" },
+  { name: "Contact", to: "contact" },
+];
+
+const Navbar = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [active, setActive] = useState("home");
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 40);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return (
+    <header
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
+        scrolled
+          ? "bg-[#08111F]/80 backdrop-blur-2xl border-b border-cyan-500/10 shadow-lg"
+          : "bg-transparent"
+      }`}
+    >
+      <div className="max-w-7xl mx-auto h-20 px-6 lg:px-10 flex items-center justify-between">
+
+        {/* Logo */}
+
+        <h1 className="text-3xl font-extrabold cursor-pointer select-none">
+          <span className="text-cyan-400">Ankur</span>
+          <span className="text-white">.</span>
+        </h1>
+
+        {/* Desktop */}
+
+        <nav className="hidden lg:flex items-center gap-3">
+
+          {navLinks.map((item) => (
+
+            <Link
+              key={item.to}
+              to={item.to}
+              smooth={true}
+              duration={600}
+              spy={true}
+              offset={-80}
+              onSetActive={() => setActive(item.to)}
+              className={`
+                relative
+                cursor-pointer
+                px-5
+                py-2.5
+                rounded-full
+                transition-all
+                duration-300
+                ${
+                  active === item.to
+                    ? "bg-cyan-500 text-white shadow-[0_0_25px_rgba(34,211,238,.35)]"
+                    : "text-gray-300 hover:text-cyan-400"
+                }
+              `}
+            >
+              {item.name}
+
+              {active === item.to && (
+                <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-cyan-300"></span>
+              )}
+
+            </Link>
+
+          ))}
+
+        </nav>
+
+        {/* Resume */}
+
+        <a
+          href="/resume.pdf"
+          target="_blank"
+          className="
+            hidden
+            lg:flex
+            items-center
+            px-6
+            py-3
+            rounded-xl
+            bg-cyan-500
+            hover:bg-cyan-400
+            hover:scale-105
+            transition
+            font-semibold
+            shadow-[0_0_20px_rgba(34,211,238,.35)]
+          "
+        >
+          Resume
+        </a>
+
+        {/* Mobile Button */}
+
+        <button
+          onClick={() => setMenuOpen(!menuOpen)}
+          className="lg:hidden text-3xl text-white"
+        >
+          {menuOpen ? <HiX /> : <HiMenuAlt3 />}
+        </button>
+
+      </div>
+
+      {/* Mobile Menu */}
+
+      <div
+        className={`lg:hidden overflow-hidden transition-all duration-500 ${
+          menuOpen ? "max-h-[500px]" : "max-h-0"
+        }`}
+      >
+
+        <div className="bg-[#08111F]/95 backdrop-blur-2xl flex flex-col items-center gap-4 py-6">
+
+          {navLinks.map((item) => (
+
+            <Link
+              key={item.to}
+              to={item.to}
+              smooth={true}
+              duration={600}
+              spy={true}
+              offset={-80}
+              onSetActive={() => setActive(item.to)}
+              onClick={() => setMenuOpen(false)}
+              className={`
+                px-6
+                py-3
+                rounded-full
+                cursor-pointer
+                transition-all
+                duration-300
+                ${
+                  active === item.to
+                    ? "bg-cyan-500 text-white"
+                    : "text-gray-300 hover:text-cyan-400"
+                }
+              `}
+            >
+              {item.name}
+            </Link>
+
+          ))}
+
+        </div>
+
+      </div>
+    </header>
+  );
+};
+
+export default Navbar;
