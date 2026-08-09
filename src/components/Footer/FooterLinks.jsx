@@ -11,7 +11,6 @@ const quickLinks = [
       { name: "Contact", href: "#contact" },
     ],
   },
-
   {
     title: "Services",
     links: [
@@ -27,53 +26,32 @@ const quickLinks = [
 
 const FooterLinks = () => {
   return (
-    <div className="grid sm:grid-cols-2 gap-12">
-
+    <div className="grid grid-cols-2 gap-6 sm:gap-8">
       {quickLinks.map((section) => (
-
         <div key={section.title}>
-
-          <h3 className="text-2xl font-bold text-white mb-8 relative inline-block">
-
+          <h3 className="text-base font-bold text-white mb-4 relative inline-block">
             {section.title}
-
-            <span className="absolute left-0 -bottom-2 w-12 h-1 rounded-full bg-cyan-400"></span>
-
+            <span className="absolute left-0 -bottom-1.5 w-6 h-0.5 rounded-full bg-cyan-400"></span>
           </h3>
 
-          <ul className="space-y-5">
-
+          <ul className="space-y-2.5">
             {section.links.map((link) => (
-
               <li key={link.name}>
-
                 <a
                   href={link.href || "#"}
-                  className="group flex items-center gap-3 text-gray-400 hover:text-cyan-400 transition-all duration-300"
+                  className="group flex items-center gap-2 text-xs sm:text-sm text-gray-400 hover:text-cyan-400 transition-colors duration-200"
                 >
-
-                  <span className="w-2 h-2 rounded-full bg-cyan-400 scale-0 group-hover:scale-100 transition duration-300"></span>
-
+                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 scale-0 group-hover:scale-100 transition-transform duration-200"></span>
                   <span className="relative">
-
                     {link.name}
-
-                    <span className="absolute left-0 -bottom-1 h-[2px] w-0 bg-cyan-400 transition-all duration-300 group-hover:w-full"></span>
-
+                    <span className="absolute left-0 -bottom-0.5 h-[1.5px] w-0 bg-cyan-400 transition-all duration-200 group-hover:w-full"></span>
                   </span>
-
                 </a>
-
               </li>
-
             ))}
-
           </ul>
-
         </div>
-
       ))}
-
     </div>
   );
 };

@@ -3,100 +3,52 @@ import { FaEnvelope, FaPhoneAlt, FaMapMarkerAlt } from "react-icons/fa";
 const FooterBrand = () => {
   return (
     <div className="max-w-md">
-
       {/* Logo */}
-
-      <h2 className="text-5xl font-black tracking-tight">
-
-        <span className="text-white">
-          Ankur
-        </span>
-
-        <span className="text-cyan-400">
-          .
-        </span>
-
+      <h2 className="text-3xl font-extrabold tracking-tight">
+        <span className="text-white">Ankur</span>
+        <span className="text-cyan-400">.</span>
       </h2>
 
       {/* Profession */}
-
-      <p className="mt-4 inline-flex rounded-full border border-cyan-400/30 bg-cyan-400/10 px-5 py-2 text-cyan-300 font-medium">
-
-        🚀 Full Stack MERN Developer
-
+      <p className="mt-2 inline-flex items-center gap-1.5 rounded-full border border-cyan-400/30 bg-cyan-400/10 px-3 py-1 text-xs text-cyan-300 font-medium">
+        <span>🚀</span> Full Stack MERN Developer
       </p>
 
       {/* Description */}
-
-      <p className="mt-8 text-gray-400 leading-8 text-lg">
-
-        Passionate about building modern,
-        fast and scalable web applications
-        using React, Node.js, Express and
-        MongoDB.
-
+      <p className="mt-3 text-xs sm:text-sm text-gray-400 leading-relaxed max-w-sm">
+        Passionate about building modern, fast and scalable web applications
+        using React, Node.js, Express and MongoDB.
       </p>
 
       {/* Contact */}
-
-      <div className="mt-8 space-y-4">
-
+      <div className="mt-5 space-y-2.5">
         <a
           href="mailto:ankurpatel926091@gmail.com"
-          className="group flex items-center gap-4 text-gray-300 hover:text-cyan-400 transition"
+          className="group flex items-center gap-3 text-xs sm:text-sm text-gray-300 hover:text-cyan-400 transition"
         >
-
-          <div className="w-11 h-11 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:border-cyan-400">
-
+          <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-xs group-hover:border-cyan-400/50 group-hover:text-cyan-400 transition">
             <FaEnvelope />
-
           </div>
-
-          <span>
-
-            ankurpatel926091@gmail.com
-
-          </span>
-
+          <span>ankurpatel926091@gmail.com</span>
         </a>
 
         <a
           href="tel:+919198370285"
-          className="group flex items-center gap-4 text-gray-300 hover:text-cyan-400 transition"
+          className="group flex items-center gap-3 text-xs sm:text-sm text-gray-300 hover:text-cyan-400 transition"
         >
-
-          <div className="w-11 h-11 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:border-cyan-400">
-
+          <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-xs group-hover:border-cyan-400/50 group-hover:text-cyan-400 transition">
             <FaPhoneAlt />
-
           </div>
-
-          <span>
-
-            +91 9198370285
-
-          </span>
-
+          <span>+91 9198370285</span>
         </a>
 
-        <div className="flex items-center gap-4 text-gray-300">
-
-          <div className="w-11 h-11 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center">
-
+        <div className="flex items-center gap-3 text-xs sm:text-sm text-gray-300">
+          <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-xs">
             <FaMapMarkerAlt />
-
           </div>
-
-          <span>
-
-            Lucknow, Uttar Pradesh
-
-          </span>
-
+          <span>Lucknow, Uttar Pradesh</span>
         </div>
-
       </div>
-
     </div>
   );
 };

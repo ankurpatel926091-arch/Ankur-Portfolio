@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { HiMenuAlt3, HiX } from "react-icons/hi";
+import { HiMenuAlt3, HiX, HiTerminal } from "react-icons/hi";
 import { Link } from "react-scroll";
 
 const navLinks = [
@@ -12,7 +12,7 @@ const navLinks = [
   { name: "Contact", to: "contact" },
 ];
 
-const Navbar = () => {
+const Navbar = ({ onOpenTerminal }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState("home");
@@ -36,20 +36,15 @@ const Navbar = () => {
       }`}
     >
       <div className="max-w-7xl mx-auto h-20 px-6 lg:px-10 flex items-center justify-between">
-
         {/* Logo */}
-
         <h1 className="text-3xl font-extrabold cursor-pointer select-none">
           <span className="text-cyan-400">Ankur</span>
           <span className="text-white">.</span>
         </h1>
 
-        {/* Desktop */}
-
+        {/* Desktop Links */}
         <nav className="hidden lg:flex items-center gap-3">
-
           {navLinks.map((item) => (
-
             <Link
               key={item.to}
               to={item.to}
@@ -61,8 +56,8 @@ const Navbar = () => {
               className={`
                 relative
                 cursor-pointer
-                px-5
-                py-2.5
+                px-4
+                py-2
                 rounded-full
                 transition-all
                 duration-300
@@ -78,59 +73,81 @@ const Navbar = () => {
               {active === item.to && (
                 <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-cyan-300"></span>
               )}
-
             </Link>
-
           ))}
-
         </nav>
 
-        {/* Resume */}
+        {/* Action Buttons: CLI + Resume */}
+        <div className="hidden lg:flex items-center gap-3">
+          <button
+            onClick={onOpenTerminal}
+            className="
+              flex
+              items-center
+              gap-2
+              px-4
+              py-2.5
+              rounded-xl
+              bg-cyan-950/40
+              hover:bg-cyan-500/15
+              border
+              border-cyan-500/40
+              hover:border-cyan-400
+              text-cyan-300
+              hover:text-cyan-200
+              transition-all
+              duration-300
+              font-mono
+              text-sm
+              font-semibold
+              shadow-[0_0_15px_rgba(34,211,238,0.15)]
+              cursor-pointer
+            "
+            title="Open Interactive Developer CLI"
+          >
+            <HiTerminal className="text-lg text-cyan-400" />
+            <span>&gt;_ CLI</span>
+          </button>
 
-        <a
-          href="/resume.pdf"
-          target="_blank"
-          className="
-            hidden
-            lg:flex
-            items-center
-            px-6
-            py-3
-            rounded-xl
-            bg-cyan-500
-            hover:bg-cyan-400
-            hover:scale-105
-            transition
-            font-semibold
-            shadow-[0_0_20px_rgba(34,211,238,.35)]
-          "
-        >
-          Resume
-        </a>
+          <a
+            href="/resume.pdf"
+            target="_blank"
+            className="
+              flex
+              items-center
+              px-5
+              py-2.5
+              rounded-xl
+              bg-cyan-500
+              hover:bg-cyan-400
+              text-black
+              hover:scale-105
+              transition
+              font-semibold
+              shadow-[0_0_20px_rgba(34,211,238,.35)]
+            "
+          >
+            Resume
+          </a>
+        </div>
 
         {/* Mobile Button */}
-
         <button
           onClick={() => setMenuOpen(!menuOpen)}
           className="lg:hidden text-3xl text-white"
         >
           {menuOpen ? <HiX /> : <HiMenuAlt3 />}
         </button>
-
       </div>
 
       {/* Mobile Menu */}
-
       <div
         className={`lg:hidden overflow-hidden transition-all duration-500 ${
-          menuOpen ? "max-h-[500px]" : "max-h-0"
+          menuOpen ? "max-h-[550px]" : "max-h-0"
         }`}
       >
-
-        <div className="bg-[#08111F]/95 backdrop-blur-2xl flex flex-col items-center gap-4 py-6">
-
+        <div className="bg-[#08111F]/95 backdrop-blur-2xl flex flex-col items-center gap-3 py-6 px-6">
           {navLinks.map((item) => (
-
             <Link
               key={item.to}
               to={item.to}
@@ -142,7 +159,7 @@ const Navbar = () => {
               onClick={() => setMenuOpen(false)}
               className={`
                 px-6
-                py-3
+                py-2.5
                 rounded-full
                 cursor-pointer
                 transition-all
@@ -156,11 +173,37 @@ const Navbar = () => {
             >
               {item.name}
             </Link>
-
           ))}
 
-        </div>
+          <div className="w-full h-px bg-white/10 my-2"></div>
 
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => {
+                setMenuOpen(false);
+                onOpenTerminal();
+              }}
+              className="
+                flex
+                items-center
+                gap-2
+                px-5
+                py-2.5
+                rounded-xl
+                bg-cyan-950/60
+                border
+                border-cyan-500/40
+                text-cyan-300
+                font-mono
+                text-sm
+                font-semibold
+              "
+            >
+              <HiTerminal className="text-lg text-cyan-400" />
+              <span>&gt;_ Open CLI Terminal</span>
+            </button>
+          </div>
+        </div>
       </div>
     </header>
   );
