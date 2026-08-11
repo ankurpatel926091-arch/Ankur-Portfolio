@@ -8,7 +8,7 @@ const BANNER = `
  |  _  || ' \\| |/ / || | '_|  | (__| |__ | | 
  |_| |_||_||_|_|\\_\\_,_|_|     \\___|____|___|
 
-⚡ Ankur Patel's Portfolio Interactive CLI [Version 1.0.0]
+⚡ Ankur Patel's Portfolio Interactive CLI [Version 1.2.0]
 💡 Type 'help' or click quick buttons below to explore.
 `;
 
@@ -17,6 +17,8 @@ const COMMANDS_LIST = [
   { cmd: "about", desc: "Who is Ankur Patel?" },
   { cmd: "skills", desc: "List technical skills & stack" },
   { cmd: "projects", desc: "Show featured projects" },
+  { cmd: "resume", desc: "View PDF resume details" },
+  { cmd: "github", desc: "View GitHub stats & profile" },
   { cmd: "experience", desc: "View work & internship experience" },
   { cmd: "certificates", desc: "Show certifications" },
   { cmd: "contact", desc: "Get contact info & social links" },
@@ -24,7 +26,7 @@ const COMMANDS_LIST = [
   { cmd: "clear", desc: "Clear terminal screen" },
 ];
 
-const TerminalModal = ({ isOpen, onClose }) => {
+const TerminalModal = ({ isOpen, onClose, onOpenResume }) => {
   const [input, setInput] = useState("");
   const [history, setHistory] = useState([
     { type: "banner", text: BANNER },
@@ -52,7 +54,6 @@ const TerminalModal = ({ isOpen, onClose }) => {
     const trimmed = cmdText.trim().toLowerCase();
     if (!trimmed) return;
 
-    // Add to input history
     setCommandHistory((prev) => [...prev, cmdText]);
     setHistoryIndex(-1);
 
@@ -82,7 +83,7 @@ const TerminalModal = ({ isOpen, onClose }) => {
           type: "output",
           text: (
             <div className="space-y-1 text-gray-300 text-xs sm:text-sm">
-              <p className="text-cyan-300 font-bold">👋 Hi, I'm Ankur Patel!</p>
+              <p className="text-cyan-300 font-bold">👋 Hi, I&apos;m Ankur Patel!</p>
               <p>🚀 <strong className="text-white">Full Stack MERN Developer</strong> based in Lucknow, Uttar Pradesh.</p>
               <p>💡 I specialize in designing and developing fast, responsive, and scalable web applications using React, Node.js, Express, and MongoDB.</p>
               <p>🎯 Passionate about clean code, UI/UX perfection, and building full-stack solutions.</p>
@@ -96,12 +97,12 @@ const TerminalModal = ({ isOpen, onClose }) => {
           type: "output",
           text: (
             <div className="space-y-2 text-xs sm:text-sm">
-              <p className="text-cyan-400 font-bold">🛠 Technical Stack & Skills:</p>
+              <p className="text-cyan-400 font-bold">🛠 Technical Stack &amp; Skills:</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-gray-300">
                 <div><span className="text-green-400 font-semibold">Frontend:</span> React.js, JavaScript (ES6+), Tailwind CSS, Framer Motion, HTML5, CSS3</div>
                 <div><span className="text-green-400 font-semibold">Backend:</span> Node.js, Express.js, RESTful APIs, JWT Auth</div>
                 <div><span className="text-green-400 font-semibold">Database:</span> MongoDB, Mongoose</div>
-                <div><span className="text-green-400 font-semibold">Tools & Platforms:</span> Git, GitHub, VS Code, Postman, Vercel</div>
+                <div><span className="text-green-400 font-semibold">Tools &amp; Platforms:</span> Git, GitHub, VS Code, Postman, Vercel</div>
               </div>
             </div>
           ),
@@ -116,18 +117,55 @@ const TerminalModal = ({ isOpen, onClose }) => {
               <p className="text-cyan-400 font-bold">📁 Featured Projects:</p>
               <div className="space-y-2">
                 <div className="border-l-2 border-cyan-400 pl-3">
-                  <p className="text-white font-semibold">1. Full Stack Portfolio Website</p>
-                  <p className="text-gray-400">Modern React portfolio with Framer Motion, interactive UI, and EmailJS integration.</p>
+                  <p className="text-white font-semibold">1. MERN E-Commerce Platform</p>
+                  <p className="text-gray-400">Full stack store with auth, admin dashboard &amp; stripe payments.</p>
                 </div>
                 <div className="border-l-2 border-green-400 pl-3">
                   <p className="text-white font-semibold">2. Library Management System</p>
-                  <p className="text-gray-400">Web app for managing books, issue/return logs, and user roles efficiently.</p>
+                  <p className="text-gray-400">Web app for managing books, issue/return logs, and user roles.</p>
                 </div>
                 <div className="border-l-2 border-purple-400 pl-3">
-                  <p className="text-white font-semibold">3. MERN Stack Web Applications</p>
-                  <p className="text-gray-400">Custom REST API driven web platforms with user auth and MongoDB backend.</p>
+                  <p className="text-white font-semibold">3. Developer Portfolio V2</p>
+                  <p className="text-gray-400">Modern React 19 portfolio with live GitHub stats, CLI &amp; smooth animations.</p>
                 </div>
               </div>
+            </div>
+          ),
+        });
+        break;
+
+      case "resume":
+      case "cat resume":
+        newHistory.push({
+          type: "output",
+          text: (
+            <div className="space-y-2 text-xs sm:text-sm">
+              <p className="text-cyan-400 font-bold">📄 Resume Document Loaded:</p>
+              <p className="text-gray-300">Opening in-browser interactive PDF reader...</p>
+              <button
+                onClick={() => {
+                  if (onOpenResume) onOpenResume();
+                }}
+                className="px-3 py-1.5 rounded bg-cyan-500 text-black font-bold text-xs hover:bg-cyan-400 transition cursor-pointer"
+              >
+                Click here to view PDF Resume
+              </button>
+            </div>
+          ),
+        });
+        if (onOpenResume) {
+          setTimeout(() => onOpenResume(), 400);
+        }
+        break;
+
+      case "github":
+        newHistory.push({
+          type: "output",
+          text: (
+            <div className="space-y-1.5 text-xs sm:text-sm text-gray-300">
+              <p className="text-cyan-400 font-bold">🐙 GitHub Profile Info:</p>
+              <p>Username: <span className="text-white font-mono">ankurpatel926091-arch</span></p>
+              <p>Profile URL: <a href="https://github.com/ankurpatel926091-arch" target="_blank" rel="noreferrer" className="text-cyan-300 underline">https://github.com/ankurpatel926091-arch</a></p>
             </div>
           ),
         });
@@ -138,11 +176,11 @@ const TerminalModal = ({ isOpen, onClose }) => {
           type: "output",
           text: (
             <div className="space-y-2 text-xs sm:text-sm">
-              <p className="text-cyan-400 font-bold">💼 Experience & Training:</p>
+              <p className="text-cyan-400 font-bold">💼 Experience &amp; Training:</p>
               <div className="space-y-2">
                 <div>
                   <p className="text-white font-semibold">💻 Web Development Intern / Trainee</p>
-                  <p className="text-gray-400 text-xs">Softpro India & DigiCoder Structure Pvt. Ltd.</p>
+                  <p className="text-gray-400 text-xs">Softpro India &amp; DigiCoder Structure Pvt. Ltd.</p>
                   <p className="text-gray-300">Worked on front-end UI design, REST API integration, and full-stack project building.</p>
                 </div>
               </div>
@@ -176,7 +214,6 @@ const TerminalModal = ({ isOpen, onClose }) => {
               <p>📧 Email: <a href="mailto:ankurpatel926091@gmail.com" className="text-cyan-300 underline">ankurpatel926091@gmail.com</a></p>
               <p>📱 Phone: <a href="tel:+919198370285" className="text-cyan-300 underline">+91 9198370285</a></p>
               <p>📍 Location: Lucknow, Uttar Pradesh, India</p>
-              <p>🌐 GitHub: <a href="https://github.com/ankurpatel926091-arch" target="_blank" rel="noreferrer" className="text-cyan-300 underline">github.com/ankurpatel926091-arch</a></p>
             </div>
           ),
         });
@@ -189,10 +226,7 @@ const TerminalModal = ({ isOpen, onClose }) => {
             <div className="p-3 rounded-lg bg-cyan-950/40 border border-cyan-400/30 text-xs sm:text-sm space-y-2">
               <p className="text-green-400 font-bold flex items-center gap-2">
                 <span className="w-2.5 h-2.5 rounded-full bg-green-400 animate-pulse"></span>
-                Status: AVAILABLE FOR FREELANCE & FULL-TIME ROLES!
-              </p>
-              <p className="text-gray-300">
-                Need a fast, responsive MERN stack web app or developer on your team?
+                Status: AVAILABLE FOR FREELANCE &amp; FULL-TIME ROLES!
               </p>
               <div className="flex gap-3 pt-1">
                 <a
@@ -201,13 +235,19 @@ const TerminalModal = ({ isOpen, onClose }) => {
                 >
                   ✉️ Send Hiring Email
                 </a>
-                <a
-                  href="tel:+919198370285"
-                  className="px-3 py-1.5 rounded-md bg-white/10 hover:bg-white/20 text-white font-medium text-xs transition"
-                >
-                  📞 Call Ankur
-                </a>
               </div>
+            </div>
+          ),
+        });
+        break;
+
+      case "matrix":
+        newHistory.push({
+          type: "output",
+          text: (
+            <div className="text-green-400 font-mono text-xs space-y-0.5 animate-pulse">
+              <p>01000001 01101110 01101011 01110101 01110010</p>
+              <p>SYSTEM INITIALIZED. WELCOME TO THE MATRIX.</p>
             </div>
           ),
         });
@@ -225,7 +265,7 @@ const TerminalModal = ({ isOpen, onClose }) => {
             type: "output",
             text: (
               <p className="text-yellow-400 font-semibold">
-                🔑 [SUDO ACCESS GRANTED]: Ankur Patel is officially hired! 🚀 (Welcome aboard!)
+                🔑 [SUDO ACCESS GRANTED]: Ankur Patel is officially hired! 🚀
               </p>
             ),
           });
@@ -234,7 +274,7 @@ const TerminalModal = ({ isOpen, onClose }) => {
             type: "error",
             text: (
               <p className="text-red-400">
-                Command not recognized: '<span className="text-white">{cmdText}</span>'. Type '<span className="text-cyan-400 underline">help</span>' for a list of valid commands.
+                Command not recognized: &apos;<span className="text-white">{cmdText}</span>&apos;. Type &apos;<span className="text-cyan-400 underline">help</span>&apos; for valid commands.
               </p>
             ),
           });
@@ -339,6 +379,7 @@ const TerminalModal = ({ isOpen, onClose }) => {
                 font-mono
                 transition
                 shrink-0
+                cursor-pointer
               "
             >
               {item.cmd}

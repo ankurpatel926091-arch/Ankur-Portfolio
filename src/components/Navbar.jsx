@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { HiMenuAlt3, HiX, HiTerminal } from "react-icons/hi";
+import { HiMenuAlt3, HiX, HiTerminal, HiDocumentText } from "react-icons/hi";
 import { Link } from "react-scroll";
+import ThemeSwitcher from "./ThemeSwitcher/ThemeSwitcher";
 
 const navLinks = [
   { name: "Home", to: "home" },
@@ -9,10 +10,11 @@ const navLinks = [
   { name: "Experience", to: "experience" },
   { name: "Projects", to: "projects" },
   { name: "Certificates", to: "certificates" },
+  { name: "GitHub", to: "github" },
   { name: "Contact", to: "contact" },
 ];
 
-const Navbar = ({ onOpenTerminal }) => {
+const Navbar = ({ onOpenTerminal, onOpenResume }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState("home");
@@ -23,16 +25,15 @@ const Navbar = ({ onOpenTerminal }) => {
     };
 
     window.addEventListener("scroll", handleScroll);
-
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <header
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
+      className={`fixed top-0 left-0 w-full z-40 transition-all duration-500 ${
         scrolled
-          ? "bg-[#08111F]/80 backdrop-blur-2xl border-b border-cyan-500/10 shadow-lg"
-          : "bg-transparent"
+          ? "bg-[#08111F]/85 backdrop-blur-2xl border-b border-cyan-500/10 shadow-lg py-1"
+          : "bg-transparent py-2"
       }`}
     >
       <div className="max-w-7xl mx-auto h-20 px-6 lg:px-10 flex items-center justify-between">
@@ -42,8 +43,8 @@ const Navbar = ({ onOpenTerminal }) => {
           <span className="text-white">.</span>
         </h1>
 
-        {/* Desktop Links */}
-        <nav className="hidden lg:flex items-center gap-3">
+        {/* Desktop Navigation Links */}
+        <nav className="hidden lg:flex items-center gap-1.5">
           {navLinks.map((item) => (
             <Link
               key={item.to}
@@ -56,36 +57,39 @@ const Navbar = ({ onOpenTerminal }) => {
               className={`
                 relative
                 cursor-pointer
-                px-4
+                px-3.5
                 py-2
                 rounded-full
+                text-sm
+                font-medium
                 transition-all
                 duration-300
                 ${
                   active === item.to
-                    ? "bg-cyan-500 text-white shadow-[0_0_25px_rgba(34,211,238,.35)]"
-                    : "text-gray-300 hover:text-cyan-400"
+                    ? "bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 shadow-[0_0_20px_rgba(34,211,238,.25)]"
+                    : "text-gray-300 hover:text-cyan-400 hover:bg-white/5"
                 }
               `}
             >
               {item.name}
-
               {active === item.to && (
-                <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-cyan-300"></span>
+                <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-cyan-400" />
               )}
             </Link>
           ))}
         </nav>
 
-        {/* Action Buttons: CLI + Resume */}
+        {/* Action Buttons: CLI + Theme + Resume */}
         <div className="hidden lg:flex items-center gap-3">
+          <ThemeSwitcher />
+
           <button
             onClick={onOpenTerminal}
             className="
               flex
               items-center
               gap-2
-              px-4
+              px-3.5
               py-2.5
               rounded-xl
               bg-cyan-950/40
@@ -98,24 +102,24 @@ const Navbar = ({ onOpenTerminal }) => {
               transition-all
               duration-300
               font-mono
-              text-sm
+              text-xs
               font-semibold
               shadow-[0_0_15px_rgba(34,211,238,0.15)]
               cursor-pointer
             "
             title="Open Interactive Developer CLI"
           >
-            <HiTerminal className="text-lg text-cyan-400" />
+            <HiTerminal className="text-base text-cyan-400" />
             <span>&gt;_ CLI</span>
           </button>
 
-          <a
-            href="/resume.pdf"
-            target="_blank"
+          <button
+            onClick={onOpenResume}
             className="
               flex
               items-center
-              px-5
+              gap-2
+              px-4
               py-2.5
               rounded-xl
               bg-cyan-500
@@ -124,29 +128,35 @@ const Navbar = ({ onOpenTerminal }) => {
               hover:scale-105
               transition
               font-semibold
+              text-xs
               shadow-[0_0_20px_rgba(34,211,238,.35)]
+              cursor-pointer
             "
           >
-            Resume
-          </a>
+            <HiDocumentText className="text-base" />
+            <span>Resume</span>
+          </button>
         </div>
 
-        {/* Mobile Button */}
-        <button
-          onClick={() => setMenuOpen(!menuOpen)}
-          className="lg:hidden text-3xl text-white"
-        >
-          {menuOpen ? <HiX /> : <HiMenuAlt3 />}
-        </button>
+        {/* Mobile Buttons */}
+        <div className="flex items-center gap-3 lg:hidden">
+          <ThemeSwitcher />
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="text-3xl text-white p-1"
+          >
+            {menuOpen ? <HiX /> : <HiMenuAlt3 />}
+          </button>
+        </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Dropdown Menu */}
       <div
         className={`lg:hidden overflow-hidden transition-all duration-500 ${
-          menuOpen ? "max-h-[550px]" : "max-h-0"
+          menuOpen ? "max-h-[600px]" : "max-h-0"
         }`}
       >
-        <div className="bg-[#08111F]/95 backdrop-blur-2xl flex flex-col items-center gap-3 py-6 px-6">
+        <div className="bg-[#08111F]/95 backdrop-blur-2xl flex flex-col items-center gap-3 py-6 px-6 border-b border-cyan-500/10">
           {navLinks.map((item) => (
             <Link
               key={item.to}
@@ -159,14 +169,15 @@ const Navbar = ({ onOpenTerminal }) => {
               onClick={() => setMenuOpen(false)}
               className={`
                 px-6
-                py-2.5
+                py-2
                 rounded-full
                 cursor-pointer
+                text-sm
                 transition-all
                 duration-300
                 ${
                   active === item.to
-                    ? "bg-cyan-500 text-white"
+                    ? "bg-cyan-500 text-black font-semibold"
                     : "text-gray-300 hover:text-cyan-400"
                 }
               `}
@@ -177,7 +188,7 @@ const Navbar = ({ onOpenTerminal }) => {
 
           <div className="w-full h-px bg-white/10 my-2"></div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center justify-center gap-3 w-full">
             <button
               onClick={() => {
                 setMenuOpen(false);
@@ -187,7 +198,7 @@ const Navbar = ({ onOpenTerminal }) => {
                 flex
                 items-center
                 gap-2
-                px-5
+                px-4
                 py-2.5
                 rounded-xl
                 bg-cyan-950/60
@@ -195,12 +206,34 @@ const Navbar = ({ onOpenTerminal }) => {
                 border-cyan-500/40
                 text-cyan-300
                 font-mono
-                text-sm
+                text-xs
                 font-semibold
               "
             >
-              <HiTerminal className="text-lg text-cyan-400" />
-              <span>&gt;_ Open CLI Terminal</span>
+              <HiTerminal className="text-base text-cyan-400" />
+              <span>Open CLI</span>
+            </button>
+
+            <button
+              onClick={() => {
+                setMenuOpen(false);
+                onOpenResume();
+              }}
+              className="
+                flex
+                items-center
+                gap-2
+                px-4
+                py-2.5
+                rounded-xl
+                bg-cyan-500
+                text-black
+                font-semibold
+                text-xs
+              "
+            >
+              <HiDocumentText className="text-base" />
+              <span>View Resume</span>
             </button>
           </div>
         </div>

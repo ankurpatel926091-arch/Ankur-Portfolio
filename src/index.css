@@ -1,31 +1,28 @@
 @import "tailwindcss";
 
-html{
-  scroll-behavior:smooth;
+html {
+  scroll-behavior: smooth;
 }
 
-body{
-  margin:0;
-  padding:0;
-  background:#0B1120;
-  color:white;
-  font-family:Inter,sans-serif;
-}
-
-*{
-  box-sizing:border-box;
-}
-
-a{
-  text-decoration:none;
-}
-
-img{
-  max-width:100%;
-  display:block;
-}
 body {
+  margin: 0;
+  padding: 0;
+  background: #0B1120;
+  color: white;
   font-family: "Inter", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
 }
 
 h1,
@@ -34,4 +31,44 @@ h3,
 h4,
 h5 {
   font-family: "Space Grotesk", sans-serif;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #08111F;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #22d3ee;
+}
+
+/* Hide scrollbar for CLI Chips */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Theme accent overlays */
+[data-theme="purple"] {
+  filter: hue-rotate(60deg);
+}
+
+[data-theme="emerald"] {
+  filter: hue-rotate(290deg);
+}
+
+[data-theme="amber"] {
+  filter: hue-rotate(170deg);
 }
