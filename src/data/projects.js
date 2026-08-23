@@ -1,3 +1,4 @@
+import aiShieldImg from "../assets/AIShield.png";
 import drVinishImg from "../assets/Dr.Vinish-Project.png";
 import projectPhoto from "../assets/projectphoto.png";
 import LibraryManagement from "../assets/LibraryManagement.png";
@@ -43,6 +44,24 @@ export const projects = [
   },
   {
     id: 3,
+    title: "AI Scam Shield & Threat Protection",
+    category: "Full Stack",
+    description:
+      "AI-powered scam detection and cyber threat protection platform featuring real-time link/text analysis, risk scoring dashboard, user alert system, and security analytics.",
+    image: aiShieldImg,
+    github: "https://github.com/ankurpatel926091-arch",
+    live: "https://scam-shield-frontend-tau.vercel.app/",
+    tech: ["React", "Node.js", "Express", "Tailwind CSS", "AI Analytics"],
+    featured: true,
+    highlights: [
+      "Real-Time AI Scam & Phishing Detection",
+      "Cyber Threat Risk Analysis Dashboard",
+      "Instant Threat Scoring & Alert System",
+      "Responsive Security Operations Portal"
+    ]
+  },
+  {
+    id: 4,
     title: "Modern Library Management",
     category: "Full Stack",
     description:
@@ -60,7 +79,7 @@ export const projects = [
     ]
   },
   {
-    id: 4,
+    id: 5,
     title: "Developer Portfolio V2",
     category: "Frontend",
     description:
@@ -78,7 +97,7 @@ export const projects = [
     ]
   },
   {
-    id: 5,
+    id: 6,
     title: "Real-Time DevChat & Code Share",
     category: "MERN Stack",
     description:

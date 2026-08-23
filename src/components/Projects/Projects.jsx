@@ -67,14 +67,14 @@ const Projects = () => {
     }
   }, [totalPages, currentIndex]);
 
-  // Auto rotate slides every 2 seconds (pause on hover or modal open)
+  // Auto rotate slides every 3 seconds (pause on hover or modal open)
   useEffect(() => {
     if (totalPages <= 1 || isPaused || isOpen) return;
 
     const timer = setInterval(() => {
       setDirection(1);
       setCurrentIndex((prev) => (prev + 1) % totalPages);
-    }, 2000);
+    }, 3000);
 
     return () => clearInterval(timer);
   }, [totalPages, isPaused, isOpen]);
