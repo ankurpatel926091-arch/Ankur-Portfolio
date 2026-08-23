@@ -1,3 +1,4 @@
+import drVinishImg from "../assets/Dr.Vinish-Project.png";
 import projectPhoto from "../assets/projectphoto.png";
 import LibraryManagement from "../assets/LibraryManagement.png";
 import portfolio from "../assets/portfolio.png";
@@ -6,12 +7,30 @@ import projectImg from "../assets/project.png";
 export const projects = [
   {
     id: 1,
+    title: "Dr. Vinish Singh Healthcare Portal",
+    category: "Full Stack",
+    description:
+      "Comprehensive full-stack medical and healthcare platform featuring online doctor appointment booking, patient portal, responsive medical services catalog, and dynamic consultation workflows.",
+    image: drVinishImg,
+    github: "https://github.com/ankurpatel926091-arch",
+    live: "https://dr-vinish-singh-frontend.vercel.app/",
+    tech: ["React", "Node.js", "Express", "MongoDB", "Tailwind CSS"],
+    featured: true,
+    highlights: [
+      "Online Doctor Appointment Booking System",
+      "Patient & Medical Consultation Management",
+      "Responsive Glassmorphic Healthcare UI",
+      "Secure API Integration & Database Schemas"
+    ]
+  },
+  {
+    id: 2,
     title: "MERN E-Commerce Platform",
     category: "MERN Stack",
     description:
       "Feature-rich full-stack e-commerce store with JWT user authentication, admin dashboard, cart management, stripe payments & order tracking.",
     image: projectPhoto,
-    github: "https://github.com/ankurpatel926091-arch/E-Commerce-Website",
+    github: "https://github.com/ankurpatel926091-arch",
     live: "https://e-commerce-website-virid-three.vercel.app/",
     tech: ["React", "Node.js", "Express", "MongoDB", "JWT", "Tailwind CSS"],
     featured: true,
@@ -23,7 +42,7 @@ export const projects = [
     ]
   },
   {
-    id: 2,
+    id: 3,
     title: "Modern Library Management",
     category: "Full Stack",
     description:
@@ -41,13 +60,13 @@ export const projects = [
     ]
   },
   {
-    id: 3,
+    id: 4,
     title: "Developer Portfolio V2",
     category: "Frontend",
     description:
       "Premium dark-themed developer portfolio built with React 19, Tailwind CSS v4, Lenis smooth scrolling, framer motion animations, and interactive CLI.",
     image: portfolio,
-    github: "https://github.com/ankurpatel926091-arch/My-Fortfolio",
+    github: "https://github.com/ankurpatel926091-arch",
     live: "https://portfolio.vercel.app",
     tech: ["React", "Tailwind CSS", "Framer Motion", "Vite", "Lenis"],
     featured: true,
@@ -59,7 +78,7 @@ export const projects = [
     ]
   },
   {
-    id: 4,
+    id: 5,
     title: "Real-Time DevChat & Code Share",
     category: "MERN Stack",
     description:

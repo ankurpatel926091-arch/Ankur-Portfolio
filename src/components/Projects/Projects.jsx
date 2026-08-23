@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useMemo } from "react";
-import { HiSearch, HiX } from "react-icons/hi";
+import { useState, useMemo, useEffect } from "react";
+import { HiSearch, HiX, HiChevronLeft, HiChevronRight } from "react-icons/hi";
 
 import ProjectsBackground from "./ProjectsBackground";
 import ProjectCard from "./ProjectCard";
@@ -12,6 +12,29 @@ const Projects = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedProject, setSelectedProject] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
+
+  // Slider State
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction, setDirection] = useState(0);
+  const [itemsPerPage, setItemsPerPage] = useState(3);
+  const [isPaused, setIsPaused] = useState(false);
+
+  // Determine items per page based on window size
+  useEffect(() => {
+    const updateItemsPerPage = () => {
+      if (window.innerWidth < 768) {
+        setItemsPerPage(1);
+      } else if (window.innerWidth < 1280) {
+        setItemsPerPage(2);
+      } else {
+        setItemsPerPage(3);
+      }
+    };
+
+    updateItemsPerPage();
+    window.addEventListener("resize", updateItemsPerPage);
+    return () => window.removeEventListener("resize", updateItemsPerPage);
+  }, []);
 
   const filteredProjects = useMemo(() => {
     return projects.filter((project) => {
@@ -30,6 +53,52 @@ const Projects = () => {
     });
   }, [selectedCategory, searchQuery]);
 
+  const totalPages = Math.ceil(filteredProjects.length / itemsPerPage) || 1;
+
+  // Reset to slide 0 when filter or search changes
+  useEffect(() => {
+    setCurrentIndex(0);
+  }, [selectedCategory, searchQuery, itemsPerPage]);
+
+  // Ensure currentIndex stays within bounds
+  useEffect(() => {
+    if (currentIndex >= totalPages && totalPages > 0) {
+      setCurrentIndex(totalPages - 1);
+    }
+  }, [totalPages, currentIndex]);
+
+  // Auto rotate slides every 2 seconds (pause on hover or modal open)
+  useEffect(() => {
+    if (totalPages <= 1 || isPaused || isOpen) return;
+
+    const timer = setInterval(() => {
+      setDirection(1);
+      setCurrentIndex((prev) => (prev + 1) % totalPages);
+    }, 2000);
+
+    return () => clearInterval(timer);
+  }, [totalPages, isPaused, isOpen]);
+
+  const handleNext = () => {
+    setDirection(1);
+    setCurrentIndex((prev) => (prev + 1) % totalPages);
+  };
+
+  const handlePrev = () => {
+    setDirection(-1);
+    setCurrentIndex((prev) => (prev - 1 + totalPages) % totalPages);
+  };
+
+  const goToSlide = (index) => {
+    setDirection(index > currentIndex ? 1 : -1);
+    setCurrentIndex(index);
+  };
+
+  const visibleProjects = useMemo(() => {
+    const start = currentIndex * itemsPerPage;
+    return filteredProjects.slice(start, start + itemsPerPage);
+  }, [filteredProjects, currentIndex, itemsPerPage]);
+
   const openModal = (project) => {
     setSelectedProject(project);
     setIsOpen(true);
@@ -38,6 +107,21 @@ const Projects = () => {
   const closeModal = () => {
     setSelectedProject(null);
     setIsOpen(false);
+  };
+
+  const slideVariants = {
+    enter: (dir) => ({
+      x: dir > 0 ? 100 : -100,
+      opacity: 0,
+    }),
+    center: {
+      x: 0,
+      opacity: 1,
+    },
+    exit: (dir) => ({
+      x: dir < 0 ? 100 : -100,
+      opacity: 0,
+    }),
   };
 
   return (
@@ -117,25 +201,60 @@ const Projects = () => {
           </div>
         </motion.div>
 
-        {/* Results Counter */}
-        <div className="flex items-center justify-between text-xs text-gray-400 mb-6 px-1">
-          <span>
-            Showing <strong className="text-cyan-400">{filteredProjects.length}</strong> of {projects.length} projects
-          </span>
-          {(selectedCategory !== "All" || searchQuery) && (
-            <button
-              onClick={() => {
-                setSelectedCategory("All");
-                setSearchQuery("");
-              }}
-              className="text-cyan-400 hover:underline cursor-pointer"
-            >
-              Reset Filters
-            </button>
+        {/* Results Counter & Slider Controls Bar */}
+        <div className="flex flex-wrap items-center justify-between text-xs text-gray-400 mb-6 px-1 gap-4">
+          <div className="flex items-center gap-4">
+            <span>
+              Showing <strong className="text-cyan-400">{filteredProjects.length}</strong> of {projects.length} projects
+            </span>
+            {(selectedCategory !== "All" || searchQuery) && (
+              <button
+                onClick={() => {
+                  setSelectedCategory("All");
+                  setSearchQuery("");
+                }}
+                className="text-cyan-400 hover:underline cursor-pointer"
+              >
+                Reset Filters
+              </button>
+            )}
+          </div>
+
+          {/* Slider Arrow Navigation Controls */}
+          {totalPages > 1 && (
+            <div className="flex items-center gap-3 ml-auto">
+              <button
+                onClick={handlePrev}
+                disabled={currentIndex === 0}
+                aria-label="Previous Slide"
+                className={`p-2.5 rounded-xl border transition-all duration-300 flex items-center justify-center ${
+                  currentIndex === 0
+                    ? "border-gray-800 text-gray-600 bg-gray-900/40 cursor-not-allowed"
+                    : "border-cyan-500/30 bg-gray-800/80 text-cyan-400 hover:bg-cyan-500 hover:text-black hover:shadow-[0_0_15px_rgba(34,211,238,0.4)] cursor-pointer"
+                }`}
+              >
+                <HiChevronLeft className="w-5 h-5" />
+              </button>
+              <span className="text-sm font-semibold text-gray-300">
+                <span className="text-cyan-400">{currentIndex + 1}</span> / {totalPages}
+              </span>
+              <button
+                onClick={handleNext}
+                disabled={currentIndex >= totalPages - 1}
+                aria-label="Next Slide"
+                className={`p-2.5 rounded-xl border transition-all duration-300 flex items-center justify-center ${
+                  currentIndex >= totalPages - 1
+                    ? "border-gray-800 text-gray-600 bg-gray-900/40 cursor-not-allowed"
+                    : "border-cyan-500/30 bg-gray-800/80 text-cyan-400 hover:bg-cyan-500 hover:text-black hover:shadow-[0_0_15px_rgba(34,211,238,0.4)] cursor-pointer"
+                }`}
+              >
+                <HiChevronRight className="w-5 h-5" />
+              </button>
+            </div>
           )}
         </div>
 
-        {/* Projects Grid */}
+        {/* Projects Slider Container */}
         {filteredProjects.length === 0 ? (
           <div className="text-center py-16 bg-[#0F172A]/40 rounded-2xl border border-dashed border-cyan-500/20">
             <p className="text-gray-400 text-lg mb-4">No projects match your current search criteria.</p>
@@ -144,30 +263,55 @@ const Projects = () => {
                 setSelectedCategory("All");
                 setSearchQuery("");
               }}
-              className="px-5 py-2.5 rounded-xl bg-cyan-500 text-black font-semibold hover:bg-cyan-400 transition"
+              className="px-5 py-2.5 rounded-xl bg-cyan-500 text-black font-semibold hover:bg-cyan-400 transition cursor-pointer"
             >
               Clear Search &amp; Filters
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-            <AnimatePresence mode="popLayout">
-              {filteredProjects.map((project, index) => (
-                <motion.div
-                  key={project.id}
-                  layout
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  transition={{ duration: 0.4, delay: index * 0.05 }}
-                >
+          <div
+            className="relative overflow-hidden min-h-[530px]"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+          >
+            <AnimatePresence custom={direction} mode="wait">
+              <motion.div
+                key={currentIndex}
+                custom={direction}
+                variants={slideVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{ duration: 0.4, ease: "easeInOut" }}
+                className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8"
+              >
+                {visibleProjects.map((project) => (
                   <ProjectCard
+                    key={project.id}
                     project={project}
                     onClick={() => openModal(project)}
                   />
-                </motion.div>
-              ))}
+                ))}
+              </motion.div>
             </AnimatePresence>
+          </div>
+        )}
+
+        {/* Slider Pagination Dots */}
+        {totalPages > 1 && (
+          <div className="flex items-center justify-center gap-2 mt-10">
+            {Array.from({ length: totalPages }).map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => goToSlide(idx)}
+                aria-label={`Go to slide ${idx + 1}`}
+                className={`transition-all duration-300 rounded-full cursor-pointer ${
+                  currentIndex === idx
+                    ? "w-8 h-3 bg-cyan-400 shadow-[0_0_12px_rgba(34,211,238,0.6)]"
+                    : "w-3 h-3 bg-gray-700 hover:bg-cyan-500/50"
+                }`}
+              />
+            ))}
           </div>
         )}
       </div>
